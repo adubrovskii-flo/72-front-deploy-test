@@ -38,7 +38,8 @@ export class AppComponent {
     private router: Router,
     private location: Location,
     private errorService: ErrorService
-  ) {}
+  ) {
+  }
 
   async ngOnInit(): Promise<void> {
     let currentPath = this.location.path();

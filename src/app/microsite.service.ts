@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
+import { environment } from 'src/environments/environment';
 import { ErrorService } from './error.service';
 import {
   Asset,
@@ -17,7 +18,7 @@ import {
 @Injectable()
 export class MicrositeService {
   http: HttpClient;
-  apiUrl = 'http://localhost:4000/collection-microsite';
+  apiUrl = environment.apiUrl;
   zip: JSZip;
   folderNestedTrace: any[] = [];
 
