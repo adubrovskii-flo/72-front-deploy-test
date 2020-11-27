@@ -1,0 +1,6 @@
+@import "../../assets/styles/base.scss";
+
+::ng-deep.mat-dialog-container {
+    background: none !important;
+    box-shadow: none !important;
+}

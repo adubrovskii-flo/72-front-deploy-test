@@ -1,0 +1,154 @@
+<div class="player-container">
+  <ng-container
+    *ngIf="playerService.currentItem$ | async as currentItem; else loading"
+  >
+    <aside
+      *ngIf="micrositeCollection.type !== 'REEL'"
+      class="player-container__info player-details absolute"
+    >
+      <div class="player-details__header">
+        <button
+          class="link"
+          [class.active]="isMediaInfoOpen"
+          (click)="isMediaInfoOpen = !isMediaInfoOpen"
+        >
+          Info
+        </button>
+        <button class="link">Download</button>
+      </div>
+      <div *ngIf="isMediaInfoOpen" class="player-details__info media-info">
+        <p>{{ currentIndex + 1 }}.{{ currentItem.title }}</p>
+        <li
+          class="media-info__item"
+          *ngFor="let item of currentItem.metadataList"
+        >
+          <ng-container *ngIf="item.value">
+            <span>{{ item.label }}: </span>
+            <span>{{ item.value }}</span>
+          </ng-container>
+        </li>
+      </div>
+    </aside>
+    <section class="player-logo absolute">
+      <a
+        class="logo__link"
+        href="https://hechostudios.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img src="../../assets/logo.png" />
+      </a>
+    </section>
+    <app-player></app-player>
+    <div class="player-caption">
+      <ng-container
+        *ngIf="micrositeCollection.type !== 'REEL'; else reelCaption"
+      >
+        <p>{{ currentIndex + 1 }}.{{ currentItem && currentItem.title }}</p>
+      </ng-container>
+      <ng-template #reelCaption>
+        <p>
+          {{ currentItem && currentItem.title }}, Editors:
+          {{
+            currentItem.metadataDic["win_Editors"] &&
+              currentItem.metadataDic["win_Editors"].value
+          }}
+          ({{ currentIndex + 1 }} of
+          {{ (playerService.playlist$ | async)["length"] }})
+        </p>
+      </ng-template>
+    </div>
+    <div
+      class="player-container__thumbnails player-thumbnails"
+      *ngIf="playerService.playlist$ | async as playlist"
+    >
+      <ng-container
+        *ngIf="micrositeCollection.type !== 'REEL'; else reelThumbnails"
+      >
+        <ul *ngIf="playlist.length; else loading">
+          <li
+            *ngFor="let item of playlist; let $index = index"
+            (click)="onClickPlaylistItem(item, $index)"
+            [class.selected]="item === currentItem"
+            #tooltip="matTooltip"
+            matTooltip="{{ item.title }}"
+            [matTooltipPosition]="'above'"
+            matTooltipHideDelay="100"
+          >
+            <img
+              width="100"
+              height="100"
+              src="{{ item.thumbnail || '../../assets/empty-file.png' }}"
+            />
+          </li>
+        </ul>
+      </ng-container>
+      <ng-template #reelThumbnails>
+        <ul *ngIf="playlist.length; else loading">
+          <li
+            *ngFor="let item of playlist; let $index = index"
+            (click)="onClickPlaylistItem(item, $index)"
+            #tooltip="matTooltip"
+            matTooltip="{{ item.title + '\n' + item.metadataAsText }}"
+            matTooltipPosition="left"
+            matTooltipClass="multiline-tooltip"
+          >
+            <img
+              width="100"
+              height="100"
+              src="{{ item.thumbnail || '../../assets/empty-file.png' }}"
+            />
+          </li>
+        </ul>
+      </ng-template>
+      <button class="link playlist-details-showBtn" (click)="onClickPlaylistDetails()">Details</button>
+      <div *ngIf="isPlaylistDetailsDisplay" class="playlist-details absolute">
+        <div class="playlist-details__inner-box" >
+          <p class="playlist-details__controls">
+            <button class="link" (click)="previousPlaylistDetailsItem()">
+              <mat-icon>navigate_before</mat-icon>
+            </button>
+            <button class="link" (click)="nextPlaylistDetailsItem()">
+              <mat-icon>navigate_next</mat-icon>
+            </button>
+          </p>
+          <div class="playlist-details__item details-item">
+            <div class="details-item__frame">
+              <img
+                src="{{
+                  playlist[playlistDetailsCurrentIdx].thumbnail ||
+                    '../../assets/empty-file.png'
+                }}"
+              />
+            </div>
+            <div class="details-item__info info-item">
+              <h3>{{ playlist[playlistDetailsCurrentIdx].title }}</h3>
+              <ul class="info-item__content">
+                <li
+                  *ngFor="
+                    let item of playlist[playlistDetailsCurrentIdx].metadataList
+                  "
+                >
+                  <span>{{ item.label }}: {{ item.value }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #loading>
+  <div class="loader-container">
+    <mat-progress-spinner
+      [color]="'primary'"
+      [mode]="'indeterminate'"
+      [value]="50"
+      [strokeWidth]="5"
+      [diameter]="80"
+    >
+    </mat-progress-spinner>
+  </div>
+</ng-template>

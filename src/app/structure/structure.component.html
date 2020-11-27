@@ -1,0 +1,19 @@
+<div class="spinner-container" *ngIf="!(isMicrositeLoaded$ | async)">
+  <mat-progress-spinner
+    [color]="'primary'"
+    [mode]="'indeterminate'"
+    [value]="50"
+    [strokeWidth]="2"
+  >
+  </mat-progress-spinner>
+</div>
+
+<div
+  class="structure-container"
+  [ngClass]="{
+    'structure-container--list': !(isGridMode$ | async),
+    'structure-container--hide': !(isMicrositeLoaded$ | async)
+  }"
+>
+  <div class="structure-outlet" #structureOutlet></div>
+</div>

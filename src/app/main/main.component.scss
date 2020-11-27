@@ -1,0 +1,86 @@
+@import "../../assets/styles/base.scss";
+
+.header__controls {
+  position: relative;
+  display: grid;
+  padding: 0 17px;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.logo {
+  height: 140px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.logo__link {
+  display: block;
+  width: 245px;
+  height: 95px;
+  background-image: url("../../assets/logo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.extra-menu {
+  position: relative;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px;
+    cursor: pointer;
+  }
+}
+
+.grid-settings {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  width: 190px;
+  height: 35px;
+  border-radius: 5px;
+  color: white;
+  background: #222;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+
+
+  &__group {
+    display: flex;
+    width: 90px;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  input {
+    cursor: pointer;
+  }
+
+  &--hide {
+    display: none;
+  }
+}
+
+.page__content {
+  margin: 25px;
+}
+
+.page__footer {
+  margin: 17px;
+  margin-top: 5vh;
+}
+
+.pagination {
+  display: flex;
+  justify-content: flex-start;
+}

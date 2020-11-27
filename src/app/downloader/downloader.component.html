@@ -1,0 +1,11 @@
+<div class="downloader">
+    <div class="downloader__controls">
+        <label class="downloader__check-label" for="downloadCheck">All</label>
+        <input type="checkbox" name="downloadCheck" id="downloadCheck" (change)="checkAllItems($event)">
+        <button mat-button (click)="download()">Download (#)</button>
+        <button mat-button (click)="downloadAllZip()">Download presentation</button>
+    </div>
+    <button class="downloader__close link" (click)="closeEvent.emit(true)">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>

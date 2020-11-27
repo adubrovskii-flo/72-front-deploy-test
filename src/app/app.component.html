@@ -1,0 +1,38 @@
+<ng-container *ngIf="!isLoaded; else pageContent">
+  <div class="spinner-container">
+    <mat-progress-spinner
+      [color]="'primary'"
+      [mode]="'indeterminate'"
+      [value]="50"
+      [strokeWidth]="2"
+    >
+    </mat-progress-spinner>
+  </div>
+</ng-container>
+<ng-template #pageContent>
+  <div class="toolbar" *ngIf="micrositeCollection$ | async as root">
+    <ul class="breadcrumbs" *ngIf="root.type !== 'REEL'; else breadcrumbsItems">
+      <li
+        class="breadcrumbs__item"
+        [ngClass]="{ 'breadcrumbs__item--inactive': last }"
+        (click)="onBreadcrumbsHandler(breadcrumb, last)"
+        *ngFor="
+          let breadcrumb of breadcrumbs$ | async as breadcrumbs;
+          let idx = index;
+          let last = last
+        "
+      >
+        <span>{{ breadcrumb.name }}</span>
+      </li>
+    </ul>
+    <button class="download-btn link" (click)="onDownload()">Download</button>
+  </div>
+  <div *ngIf="isDownloaderOpen">
+    <app-downloader (closeEvent)="onDownload()"></app-downloader>
+  </div>
+  <router-outlet></router-outlet>
+</ng-template>
+
+<ng-template #breadcrumbsItems>
+  <p class="toolbar__reelname">{{ (micrositeCollection$ | async).reelName }}</p>
+</ng-template>

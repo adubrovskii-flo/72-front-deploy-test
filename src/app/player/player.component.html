@@ -1,0 +1,26 @@
+<article class="player" *ngIf="playerService.currentItem$ | async as currentItem">
+  <span [ngSwitch]="currentItem.type && currentItem.type.fileExtention">
+    <div *ngSwitchCase="FILE_TYPE.mp4" class="player__view player-video">
+      <video controls poster="{{ currentItem.thumbnail }}" preload="auto">
+        <source src="{{ currentItem.src }}" type="video/mp4" />
+      </video>
+    </div>
+    <div *ngSwitchCase="FILE_TYPE.mp3" class="player__view player-audio">
+      <audio controls src="{{ currentItem.src }}">
+        <source src="{{ currentItem.src }}" type="audio/mpeg" />
+      </audio>
+    </div>
+    <div *ngSwitchCase="FILE_TYPE.png" class="player__view player-img">
+      <img src="{{ currentItem.src }}" alt="{{ currentItem.title }}" />
+    </div>
+    <div *ngSwitchDefault class="player__view player-default">
+      <img src="../../assets/logo.png" alt="Not found" />
+    </div>
+  </span>
+  <div class="player__next absolute" (click)="onClickNext()">
+    <mat-icon>skip_next</mat-icon>
+  </div>
+  <div class="player__previous absolute" (click)="onClickPrevious()">
+    <mat-icon>skip_previous</mat-icon>
+  </div>
+</article>

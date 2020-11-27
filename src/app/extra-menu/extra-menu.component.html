@@ -1,0 +1,8 @@
+<button class="link" (click)="changeGridMode()">
+    <ng-container *ngIf="isGridMode; else listModeTmpl">
+        <mat-icon>grid_on</mat-icon>
+    </ng-container>
+    <ng-template #listModeTmpl>
+        <mat-icon>list</mat-icon>
+    </ng-template>
+</button>

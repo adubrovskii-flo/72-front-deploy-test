@@ -1,0 +1,59 @@
+<div class="page">
+  <header class="header page__header">
+    <div class="logo">
+      <a
+        class="logo__link"
+        href="https://hechostudios.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+      ></a>
+    </div>
+    <div class="header__controls">
+      <div class="pagination">
+        <app-paginator></app-paginator>
+      </div>
+      <div class="extra-menu">
+        <button (click)="showGridSettings()">
+          <mat-icon>settings</mat-icon>
+        </button>
+        <form
+          [formGroup]="gridSettingsForm"
+          class="grid-settings"
+          [ngClass]="{ 'grid-settings--hide': !isGridSettingsOpened }"
+        >
+          <div class="grid-settings__group">
+            <input
+              type="radio"
+              name="gridMode"
+              id="gridOn"
+              [value]="true"
+              formControlName="gridMode"
+            />
+            <mat-icon>grid_on</mat-icon>
+            <label for="gridOn">Grid</label>
+          </div>
+          <div class="grid-settings__group">
+            <input
+              type="radio"
+              name="gridMode"
+              id="listOn"
+              [value]="false"
+              formControlName="gridMode"
+            />
+            <mat-icon>list</mat-icon>
+            <label for="listOn">List</label>
+          </div>
+        </form>
+      </div>
+    </div>
+  </header>
+  <section class="page__content">
+    <router-outlet></router-outlet>
+  </section>
+  <footer class="footer page__footer">
+    <div class="pagination">
+      <!-- TODO: Synchronize with paginator  above -->
+      <!-- <app-paginator></app-paginator> -->
+    </div>
+  </footer>
+</div>

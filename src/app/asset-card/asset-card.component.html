@@ -1,0 +1,15 @@
+<app-structure-card
+  [data]="data"
+  [idx]="idx"
+  [type]="'ASSET'"
+  [thumb]="data.keyframeURL"
+  (onOpenEvent)="open($event)"
+>
+  <button class="link" (click)="openQuickviewDialog()">
+    <mat-icon>preview</mat-icon>
+  </button>
+  <button class="link" (click)="download()">
+    <mat-icon>download</mat-icon>
+  </button>
+</app-structure-card>
+<div class="custom-container" #container></div>

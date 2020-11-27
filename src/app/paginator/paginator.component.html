@@ -1,0 +1,9 @@
+<div *ngIf="currentCollectionSize$ | async as currentCollectionSize">
+  <mat-paginator
+    [length]="currentCollectionSize"
+    [pageSize]="pageSizeOptions[0]"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="paginate($event)"
+  >
+  </mat-paginator>
+</div>

@@ -1,0 +1,67 @@
+@import "../../assets/styles/base.scss";
+
+$icon-size: 72px;
+$player-height: 400px;
+$player-width: 800px;
+$icon-color: #757171;
+$icon-hover-color: #000000;
+
+.player {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+
+  &__view {
+    width: $player-width;
+    height: $player-height;
+  }
+
+  video {
+    width: $player-width;
+    height: $player-height;
+    cursor: pointer;
+  }
+
+  &__next {
+    top: calc((#{$player-height} / 2) - (#{$icon-size} / 2));
+    right: 48px;
+    cursor: pointer;
+    color: $icon-color;
+    &:hover {
+      color: $icon-hover-color;
+    }
+  }
+
+  &__previous {
+    top: calc((#{$player-height} / 2) - (#{$icon-size} / 2));
+    left: 0;
+    cursor: pointer;
+    color: $icon-color;
+    &:hover {
+      color: $icon-hover-color;
+    }
+  }
+
+  ::ng-deep mat-icon {
+    font-size: $icon-size !important;
+  }
+}
+
+.player-video {
+}
+
+.player-audio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-img,
+.player-default {
+  text-align: center;
+  img {
+    width: inherit;
+    height: inherit;
+  }
+}

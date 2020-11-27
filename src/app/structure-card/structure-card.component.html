@@ -1,0 +1,53 @@
+<div class="card" [ngClass]="{ 'card--vertical': !(isGridMode$ | async) }">
+  <div
+    class="card__toolset-container"
+    [ngClass]="{
+      'card__toolset-container--selected': (isSelectedAllItems$ | async),
+      'card__toolset-container--vertical': !(isGridMode$ | async)
+    }"
+  >
+    <div
+      (click)="onOpen()"
+      class="card__pic"
+      style="--thumbnail: url('{{ thumb }}')"
+      [ngClass]="{
+        'card__pic--void': type === 'ASSET' && !thumb,
+        'card__pic--folder': type === 'COLLECTION',
+        'card__pic--inactive': (isSelectionMode$ | async)
+      }"
+    ></div>
+    <div
+      class="card__toolset"
+      [ngClass]="{ 'card__toolset--selection': (isSelectionMode$ | async) }"
+    >
+      <div
+        class="card__toolset__inner"
+        *ngIf="isSelectionMode$ | async; else passedContent"
+      >
+        <div class="card__toolset__checkbox">
+          <label for="selectedItem">Select</label>
+          <input
+            type="checkbox"
+            name="selectedItem"
+            id="selectedItem"
+            [checked]="isSelectedAllItems$ | async"
+          />
+        </div>
+      </div>
+      <ng-template #passedContent>
+        <ng-content></ng-content>
+      </ng-template>
+    </div>
+  </div>
+  <div class="card__caption card-caption">
+    <h3>
+      {{ idx }}. {{ data.title }}
+    </h3>
+      <ul *ngIf="!(isGridMode$ | async)" class="card-caption__list">
+        <li class="card-caption__item" *ngFor="let item of getMetadataAsList()">
+          <span>{{ item.label }}: </span>
+          <span>{{ item.value }}</span>
+        </li>
+      </ul>
+  </div>
+</div>
