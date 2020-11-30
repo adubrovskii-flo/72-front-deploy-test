@@ -43,7 +43,7 @@
     <h3>
       {{ idx }}. {{ data.title }}
     </h3>
-      <ul *ngIf="!(isGridMode$ | async)" class="card-caption__list">
+      <ul *ngIf="!(isGridMode$ | async) && type !== 'COLLECTION'; else folderMeta" class="card-caption__list">
         <li class="card-caption__item" *ngFor="let item of getMetadataAsList()">
           <span>{{ item.label }}: </span>
           <span>{{ item.value }}</span>
@@ -51,3 +51,15 @@
       </ul>
   </div>
 </div>
+
+<ng-template #folderMeta>
+  <li class="card-caption__item">
+    <span>Type: </span>
+    <span>folder</span>
+  </li>
+  <li class="card-caption__item">
+    <span>Items: </span>
+    <span>{{ data['assets'] && data['assets'].length || 0}}</span>
+  </li>
+</ng-template>
+

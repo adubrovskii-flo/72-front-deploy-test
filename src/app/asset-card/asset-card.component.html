@@ -8,8 +8,8 @@
   <button class="link" (click)="openQuickviewDialog()">
     <mat-icon>preview</mat-icon>
   </button>
-  <button class="link" (click)="download()">
+  <a class="link" [href]="data.sourceURL">
     <mat-icon>download</mat-icon>
-  </button>
+  </a>
 </app-structure-card>
 <div class="custom-container" #container></div>
