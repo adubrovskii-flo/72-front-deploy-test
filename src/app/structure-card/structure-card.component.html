@@ -40,15 +40,18 @@
     </div>
   </div>
   <div class="card__caption card-caption">
-    <h3>
-      {{ idx }}. {{ data.title }}
-    </h3>
-      <ul *ngIf="!(isGridMode$ | async) && type !== 'COLLECTION'; else folderMeta" class="card-caption__list">
+    <h3>{{ idx }}. {{ data.title }}</h3>
+    <ng-container *ngIf="!(isGridMode$ | async)">
+      <ul
+        *ngIf="type !== 'COLLECTION'; else folderMeta"
+        class="card-caption__list"
+      >
         <li class="card-caption__item" *ngFor="let item of getMetadataAsList()">
           <span>{{ item.label }}: </span>
           <span>{{ item.value }}</span>
         </li>
       </ul>
+    </ng-container>
   </div>
 </div>
 
