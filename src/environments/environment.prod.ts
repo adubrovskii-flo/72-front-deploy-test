@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://89b35df0a823.ngrok.io/collection-microsite'
+  apiUrl: 'http://7a7e9419bac0.ngrok.io/collection-microsite'
 };
